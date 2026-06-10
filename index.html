@@ -173,7 +173,7 @@
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_replyto" data-replyto />
-          <input type="hidden" name="Resumen comercial" data-lead-summary />
+          <input type="hidden" name="Resumen de la consulta" data-lead-summary />
           <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden-field" />
           <label>
             Nombre
@@ -181,15 +181,15 @@
           </label>
           <label>
             Email
-            <input name="email" type="email" autocomplete="email" required />
+            <input name="Email" type="email" autocomplete="email" required />
           </label>
           <label>
             Teléfono
-            <input name="Telefono" type="tel" autocomplete="tel" />
+            <input name="Teléfono" type="tel" autocomplete="tel" required />
           </label>
           <label>
             Tamaño estimado
-            <select name="Tamano estimado" required>
+            <select name="Tamaño estimado" required>
               <option value="">Seleccionar tamaño</option>
               <option value="2 x 1 m">2 x 1 m</option>
               <option value="3 x 2 m">3 x 2 m</option>
@@ -226,7 +226,7 @@
           </fieldset>
           <label>
             Mensaje
-            <textarea name="message" rows="5" required></textarea>
+            <textarea name="Mensaje" rows="5" required></textarea>
           </label>
           <button class="button button-primary" type="submit">Enviar consulta</button>
           <p class="form-status" role="status" aria-live="polite" data-form-status></p>
