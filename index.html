@@ -169,12 +169,15 @@
         </div>
 
         <form class="contact-form" data-contact-form>
-          <input type="hidden" name="_subject" value="Nueva consulta por pantalla LED" />
+          <input type="hidden" name="_subject" value="Lead calificado | Pantallas LED" />
+          <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_replyto" data-replyto />
+          <input type="hidden" name="Resumen comercial" data-lead-summary />
           <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden-field" />
           <label>
             Nombre
-            <input name="name" type="text" autocomplete="name" required />
+            <input name="Nombre" type="text" autocomplete="name" required />
           </label>
           <label>
             Email
@@ -182,8 +185,45 @@
           </label>
           <label>
             Teléfono
-            <input name="phone" type="tel" autocomplete="tel" />
+            <input name="Telefono" type="tel" autocomplete="tel" />
           </label>
+          <label>
+            Tamaño estimado
+            <select name="Tamano estimado" required>
+              <option value="">Seleccionar tamaño</option>
+              <option value="2 x 1 m">2 x 1 m</option>
+              <option value="3 x 2 m">3 x 2 m</option>
+              <option value="4 x 3 m">4 x 3 m</option>
+              <option value="6 x 3 m">6 x 3 m</option>
+              <option value="A definir">A definir</option>
+            </select>
+          </label>
+          <label>
+            Uso previsto
+            <select name="Uso previsto" required>
+              <option value="">Seleccionar uso</option>
+              <option value="Evento o escenario">Evento o escenario</option>
+              <option value="Local comercial o vidriera">Local comercial o vidriera</option>
+              <option value="Campaña publicitaria">Campaña publicitaria</option>
+              <option value="Exterior permanente">Exterior permanente</option>
+              <option value="Otro uso">Otro uso</option>
+            </select>
+          </label>
+          <fieldset class="choice-group">
+            <legend>Urgencia</legend>
+            <label class="choice-card">
+              <input type="radio" name="Urgencia" value="Esta semana" required />
+              <span>Esta semana</span>
+            </label>
+            <label class="choice-card">
+              <input type="radio" name="Urgencia" value="Este mes" />
+              <span>Este mes</span>
+            </label>
+            <label class="choice-card">
+              <input type="radio" name="Urgencia" value="Estoy comparando opciones" />
+              <span>Comparando</span>
+            </label>
+          </fieldset>
           <label>
             Mensaje
             <textarea name="message" rows="5" required></textarea>
