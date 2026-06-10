@@ -5,6 +5,8 @@ const navToggle = document.querySelector("[data-nav-toggle]");
 const nav = document.querySelector("[data-nav]");
 const form = document.querySelector("[data-contact-form]");
 const statusEl = document.querySelector("[data-form-status]");
+const leadSummary = document.querySelector("[data-lead-summary]");
+const replyTo = document.querySelector("[data-replyto]");
 
 navToggle?.addEventListener("click", () => {
   const isOpen = nav?.classList.toggle("is-open");
@@ -22,18 +24,24 @@ form?.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const data = new FormData(form);
-  const name = String(data.get("name") || "").trim();
+  const name = String(data.get("Nombre") || "").trim();
   const email = String(data.get("email") || "").trim();
+  const size = String(data.get("Tamano estimado") || "").trim();
+  const useCase = String(data.get("Uso previsto") || "").trim();
+  const urgency = String(data.get("Urgencia") || "").trim();
   const message = String(data.get("message") || "").trim();
 
-  if (!name || !email || !message) {
-    statusEl.textContent = "Completá nombre, email y mensaje para enviar la consulta.";
+  if (!name || !email || !size || !useCase || !urgency || !message) {
+    statusEl.textContent = "Completá los datos principales para enviar la consulta.";
     return;
   }
 
+  leadSummary.value = `${name} consulta por una pantalla ${size} para ${useCase}. Urgencia: ${urgency}.`;
+  replyTo.value = email;
+
   const submitButton = form.querySelector('button[type="submit"]');
   submitButton.disabled = true;
-  statusEl.textContent = "Enviando consulta...";
+  statusEl.textContent = "Enviando consulta sin abrir otras aplicaciones...";
 
   try {
     const response = await fetch(FORM_ENDPOINT, {
