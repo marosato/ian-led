@@ -503,6 +503,7 @@ textarea {
   color: var(--ink);
   font: inherit;
   font-size: 15px;
+  font-weight: 400;
   outline: none;
   padding: 14px 14px;
   resize: vertical;
@@ -582,6 +583,108 @@ select {
 
 .hidden-field {
   display: none;
+}
+
+.modal-backdrop {
+  align-items: center;
+  background: rgba(8, 12, 18, 0.64);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 18px;
+  position: fixed;
+  z-index: 80;
+}
+
+.modal-backdrop[hidden] {
+  display: none;
+}
+
+.success-modal {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.28);
+  max-width: 480px;
+  padding: clamp(24px, 4vw, 34px);
+  width: min(100%, 480px);
+}
+
+.success-icon {
+  align-items: center;
+  background: var(--lime);
+  border-radius: 8px;
+  color: var(--dark);
+  display: flex;
+  height: 52px;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: 52px;
+}
+
+.success-icon svg {
+  height: 28px;
+  width: 28px;
+}
+
+.success-icon path {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+}
+
+.receipt-label {
+  color: #006c82;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.success-modal h2 {
+  font-size: clamp(28px, 4vw, 38px);
+  line-height: 1.02;
+  margin-bottom: 12px;
+}
+
+.success-modal p:not(.receipt-label) {
+  color: var(--muted);
+  margin-bottom: 22px;
+}
+
+.receipt-details {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  margin: 0 0 22px;
+  overflow: hidden;
+}
+
+.receipt-details div {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 0.42fr 1fr;
+  padding: 12px 14px;
+}
+
+.receipt-details div + div {
+  border-top: 1px solid var(--line);
+}
+
+.receipt-details dt {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.receipt-details dd {
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0;
+  overflow-wrap: anywhere;
 }
 
 .site-footer {
@@ -700,6 +803,10 @@ select {
   }
 
   .choice-group {
+    grid-template-columns: 1fr;
+  }
+
+  .receipt-details div {
     grid-template-columns: 1fr;
   }
 }
