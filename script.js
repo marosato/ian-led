@@ -9,7 +9,6 @@ const leadSummary = document.querySelector("[data-lead-summary]");
 const replyTo = document.querySelector("[data-replyto]");
 const successModal = document.querySelector("[data-success-modal]");
 const closeModalButton = document.querySelector("[data-close-modal]");
-const modalReference = document.querySelector("[data-modal-reference]");
 const modalDate = document.querySelector("[data-modal-date]");
 const modalName = document.querySelector("[data-modal-name]");
 const modalEmail = document.querySelector("[data-modal-email]");
@@ -44,17 +43,20 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-const openSuccessModal = ({ name, email }) => {
-  const now = new Date();
-  const reference = `LED-${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}${String(
-    now.getDate()
-  ).padStart(2, "0")}-${String(now.getHours()).padStart(2, "0")}${String(now.getMinutes()).padStart(2, "0")}`;
+const formatReceiptDate = (date) => {
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+  const hour24 = date.getHours();
+  const hour12 = hour24 % 12 || 12;
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const period = hour24 >= 12 ? "p.m." : "a.m.";
 
-  modalReference.textContent = reference;
-  modalDate.textContent = now.toLocaleString("es-AR", {
-    dateStyle: "short",
-    timeStyle: "short",
-  });
+  return `${day}/${month}/${year} ${String(hour12).padStart(2, "0")}:${minutes} ${period}`;
+};
+
+const openSuccessModal = ({ name, email }) => {
+  modalDate.textContent = formatReceiptDate(new Date());
   modalName.textContent = name;
   modalEmail.textContent = email;
   successModal.hidden = false;
