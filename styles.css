@@ -687,6 +687,10 @@ select {
   overflow-wrap: anywhere;
 }
 
+.success-modal [data-close-modal] {
+  width: 100%;
+}
+
 .site-footer {
   align-items: center;
   background: var(--dark);
