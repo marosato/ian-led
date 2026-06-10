@@ -127,6 +127,12 @@ a {
   box-shadow: 0 16px 36px rgba(183, 255, 60, 0.22);
 }
 
+.button:disabled {
+  cursor: wait;
+  opacity: 0.68;
+  transform: none;
+}
+
 .button-secondary {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -462,7 +468,7 @@ h2 {
   margin-top: 28px;
 }
 
-.contact-lines a {
+.contact-email {
   color: #006c82;
   font-weight: 900;
 }
@@ -514,6 +520,10 @@ textarea:focus {
   font-weight: 800;
   margin: 0;
   min-height: 22px;
+}
+
+.hidden-field {
+  display: none;
 }
 
 .site-footer {
