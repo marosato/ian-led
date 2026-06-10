@@ -7,6 +7,12 @@ const form = document.querySelector("[data-contact-form]");
 const statusEl = document.querySelector("[data-form-status]");
 const leadSummary = document.querySelector("[data-lead-summary]");
 const replyTo = document.querySelector("[data-replyto]");
+const successModal = document.querySelector("[data-success-modal]");
+const closeModalButton = document.querySelector("[data-close-modal]");
+const modalReference = document.querySelector("[data-modal-reference]");
+const modalDate = document.querySelector("[data-modal-date]");
+const modalName = document.querySelector("[data-modal-name]");
+const modalEmail = document.querySelector("[data-modal-email]");
 
 navToggle?.addEventListener("click", () => {
   const isOpen = nav?.classList.toggle("is-open");
@@ -19,6 +25,41 @@ nav?.addEventListener("click", (event) => {
     navToggle?.setAttribute("aria-expanded", "false");
   }
 });
+
+const closeSuccessModal = () => {
+  successModal.hidden = true;
+};
+
+closeModalButton?.addEventListener("click", closeSuccessModal);
+
+successModal?.addEventListener("click", (event) => {
+  if (event.target === successModal) {
+    closeSuccessModal();
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !successModal?.hidden) {
+    closeSuccessModal();
+  }
+});
+
+const openSuccessModal = ({ name, email }) => {
+  const now = new Date();
+  const reference = `LED-${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}${String(
+    now.getDate()
+  ).padStart(2, "0")}-${String(now.getHours()).padStart(2, "0")}${String(now.getMinutes()).padStart(2, "0")}`;
+
+  modalReference.textContent = reference;
+  modalDate.textContent = now.toLocaleString("es-AR", {
+    dateStyle: "short",
+    timeStyle: "short",
+  });
+  modalName.textContent = name;
+  modalEmail.textContent = email;
+  successModal.hidden = false;
+  closeModalButton?.focus();
+};
 
 form?.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -76,6 +117,7 @@ form?.addEventListener("submit", async (event) => {
 
     form.reset();
     statusEl.textContent = "Consulta enviada correctamente. Gracias por contactarte.";
+    openSuccessModal({ name, email });
   } catch (error) {
     statusEl.textContent =
       "No pudimos enviar la consulta en este momento. Probá nuevamente en unos minutos.";
