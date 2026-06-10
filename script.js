@@ -25,29 +25,49 @@ form?.addEventListener("submit", async (event) => {
 
   const data = new FormData(form);
   const name = String(data.get("Nombre") || "").trim();
-  const email = String(data.get("email") || "").trim();
-  const size = String(data.get("Tamano estimado") || "").trim();
+  const email = String(data.get("Email") || "").trim();
+  const phone = String(data.get("Teléfono") || "").trim();
+  const size = String(data.get("Tamaño estimado") || "").trim();
   const useCase = String(data.get("Uso previsto") || "").trim();
   const urgency = String(data.get("Urgencia") || "").trim();
-  const message = String(data.get("message") || "").trim();
+  const message = String(data.get("Mensaje") || "").trim();
 
-  if (!name || !email || !size || !useCase || !urgency || !message) {
+  if (!name || !email || !phone || !size || !useCase || !urgency || !message) {
     statusEl.textContent = "Completá los datos principales para enviar la consulta.";
     return;
   }
 
-  leadSummary.value = `${name} consulta por una pantalla ${size} para ${useCase}. Urgencia: ${urgency}.`;
+  const summary = `${name} consulta por una pantalla ${size} para ${useCase}. Urgencia: ${urgency}.`;
+  leadSummary.value = summary;
   replyTo.value = email;
+
+  const payload = new URLSearchParams({
+    _subject: "Consulta calificada | Pantallas LED",
+    _template: "table",
+    _captcha: "false",
+    _replyto: email,
+    "Resumen de la consulta": summary,
+    Nombre: name,
+    Email: email,
+    Teléfono: phone,
+    "Tamaño estimado": size,
+    "Uso previsto": useCase,
+    Urgencia: urgency,
+    Mensaje: message,
+  });
 
   const submitButton = form.querySelector('button[type="submit"]');
   submitButton.disabled = true;
-  statusEl.textContent = "Enviando consulta sin abrir otras aplicaciones...";
+  statusEl.textContent = "Enviando consulta...";
 
   try {
     const response = await fetch(FORM_ENDPOINT, {
       method: "POST",
-      headers: { Accept: "application/json" },
-      body: data,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      },
+      body: payload,
     });
 
     if (!response.ok) {
