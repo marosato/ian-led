@@ -1,4 +1,5 @@
 const CONTACT_EMAIL = "testing.prueba2100@gmail.com";
+const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
 
 const navToggle = document.querySelector("[data-nav-toggle]");
 const nav = document.querySelector("[data-nav]");
@@ -17,13 +18,12 @@ nav?.addEventListener("click", (event) => {
   }
 });
 
-form?.addEventListener("submit", (event) => {
+form?.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const data = new FormData(form);
   const name = String(data.get("name") || "").trim();
   const email = String(data.get("email") || "").trim();
-  const phone = String(data.get("phone") || "").trim();
   const message = String(data.get("message") || "").trim();
 
   if (!name || !email || !message) {
@@ -31,11 +31,27 @@ form?.addEventListener("submit", (event) => {
     return;
   }
 
-  const subject = encodeURIComponent(`Consulta por pantalla LED - ${name}`);
-  const body = encodeURIComponent(
-    `Nombre: ${name}\nEmail: ${email}\nTeléfono: ${phone || "No indicado"}\n\nMensaje:\n${message}`
-  );
+  const submitButton = form.querySelector('button[type="submit"]');
+  submitButton.disabled = true;
+  statusEl.textContent = "Enviando consulta...";
 
-  statusEl.textContent = "Abriendo tu correo con la consulta lista para enviar...";
-  window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+  try {
+    const response = await fetch(FORM_ENDPOINT, {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: data,
+    });
+
+    if (!response.ok) {
+      throw new Error("No se pudo enviar la consulta.");
+    }
+
+    form.reset();
+    statusEl.textContent = "Consulta enviada correctamente. Gracias por contactarte.";
+  } catch (error) {
+    statusEl.textContent =
+      "No pudimos enviar la consulta en este momento. Probá nuevamente en unos minutos.";
+  } finally {
+    submitButton.disabled = false;
+  }
 });
