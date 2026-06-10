@@ -159,16 +159,19 @@
         <div class="contact-copy">
           <h2>Contacto</h2>
           <p>
-            Completá el formulario y se generará una consulta lista para enviar. Incluí el tamaño
+            Completá el formulario y enviá tu consulta desde esta misma página. Incluí el tamaño
             aproximado, uso previsto y ciudad para recibir una cotización más precisa.
           </p>
           <div class="contact-lines">
-            <a href="mailto:testing.prueba2100@gmail.com">testing.prueba2100@gmail.com</a>
+            <span class="contact-email">testing.prueba2100@gmail.com</span>
             <span>Respuesta comercial personalizada</span>
           </div>
         </div>
 
         <form class="contact-form" data-contact-form>
+          <input type="hidden" name="_subject" value="Nueva consulta por pantalla LED" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden-field" />
           <label>
             Nombre
             <input name="name" type="text" autocomplete="name" required />
