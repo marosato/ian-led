@@ -239,6 +239,46 @@
       <a href="#inicio">Volver arriba</a>
     </footer>
 
+    <div class="modal-backdrop" data-success-modal hidden>
+      <section
+        class="success-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="success-title"
+        aria-describedby="success-description"
+      >
+        <div class="success-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false">
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+        </div>
+        <p class="receipt-label">Comprobante de solicitud</p>
+        <h2 id="success-title">Consulta enviada correctamente</h2>
+        <p id="success-description">
+          Recibimos tu solicitud y quedó registrada para responderla con una cotización personalizada.
+        </p>
+        <dl class="receipt-details">
+          <div>
+            <dt>Operación</dt>
+            <dd data-modal-reference>--</dd>
+          </div>
+          <div>
+            <dt>Fecha</dt>
+            <dd data-modal-date>--</dd>
+          </div>
+          <div>
+            <dt>Nombre</dt>
+            <dd data-modal-name>--</dd>
+          </div>
+          <div>
+            <dt>Email</dt>
+            <dd data-modal-email>--</dd>
+          </div>
+        </dl>
+        <button class="button button-primary" type="button" data-close-modal>Cerrar</button>
+      </section>
+    </div>
+
     <script src="script.js"></script>
   </body>
 </html>
