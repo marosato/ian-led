@@ -1,4 +1,4 @@
-const CONTACT_EMAIL = "contacto@iangrinbankled.com";
+const CONTACT_EMAIL = "testing.prueba2100@gmail.com";
 
 const navToggle = document.querySelector("[data-nav-toggle]");
 const nav = document.querySelector("[data-nav]");
